@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net11.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Security.Cryptography.Pkcs" Version="10.0.15" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<ProjectReference Include="..\Authentication.Api\Authentication.Api.csproj" />
+		<ProjectReference Include="..\Authentication.Application\Authentication.Application.csproj" />
+		<ProjectReference Include="..\Authentication.Domain\Authentication.Domain.csproj" />
+		<ProjectReference Include="..\Authentication.Infrastructure\Authentication.Infrastructure.csproj" />
+		<ProjectReference Include="..\Authentication.UnitTest\Authentication.UnitTest.csproj" />
+		<ProjectReference Include="..\Authentication.Worker\Authentication.Worker.csproj" />
+	</ItemGroup>
+
+</Project>

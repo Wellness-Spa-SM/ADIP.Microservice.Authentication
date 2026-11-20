@@ -1,0 +1,24 @@
+<Solution>
+  <Folder Name="/Items/">
+    <File Path=".gitattributes" />
+    <File Path=".github/workflows/build.yml" />
+    <File Path=".gitignore" />
+    <File Path="LICENSE.txt" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Shared/">
+    <Project Path="Authentication.Common/Authentication.Common.csproj" />
+  </Folder>
+  <Folder Name="/Sources/">
+    <Project Path="Authentication.Api/Authentication.Api.csproj" />
+    <Project Path="Authentication.Application/Authentication.Application.csproj" />
+    <Project Path="Authentication.Domain/Authentication.Domain.csproj" />
+    <Project Path="Authentication.Infrastructure/Authentication.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="Authentication.UnitTest/Authentication.UnitTest.csproj" />
+  </Folder>
+  <Folder Name="/Workers/">
+    <Project Path="Authentication.Worker/Authentication.Worker.csproj" />
+  </Folder>
+</Solution>

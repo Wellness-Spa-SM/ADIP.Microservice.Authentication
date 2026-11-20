@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net11.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Folder Include="Interfaces\Models\" />
+		<Folder Include="Models\Dtos\" />
+		<Folder Include="Models\Complex\" />
+		<Folder Include="Models\Entities\CodesTable\" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="System.Security.Cryptography.Pkcs" Version="10.0.15" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="TM.Common.EntityFrameworkCore" Version="1.0.0" />
+		<PackageReference Include="TM.Common.Models" Version="1.0.0" />
+	</ItemGroup>
+
+</Project>
