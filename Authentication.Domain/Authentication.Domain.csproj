@@ -8,18 +8,24 @@
 
 	<ItemGroup>
 		<Folder Include="Interfaces\Models\" />
+		<Folder Include="Interfaces\Repositories\" />
 		<Folder Include="Models\Dtos\" />
 		<Folder Include="Models\Complex\" />
-		<Folder Include="Models\Entities\CodesTable\" />
 	</ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="System.Security.Cryptography.Pkcs" Version="10.0.15" />
+		<PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="11.0.0" />
 	</ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="TM.Common.EntityFrameworkCore" Version="1.0.0" />
-		<PackageReference Include="TM.Common.Models" Version="1.0.0" />
+		<PackageReference Include="TM.Common.Constants" Version="1.0.0" />
+		<PackageReference Include="TM.Common.EntityFrameworkCore" Version="1.0.2" />
+		<PackageReference Include="TM.Common.Models" Version="1.0.1" />
+		<PackageReference Include="TM.Common.Utils" Version="1.0.1" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\Authentication.Common\Authentication.Common.csproj" />
 	</ItemGroup>
 
 </Project>

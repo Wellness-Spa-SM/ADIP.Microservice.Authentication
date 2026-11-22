@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Authentication.Domain.Models.Dtos
+namespace Authentication.Infrastructure.Seeders
 {
-    internal class ProductDto
+    public class RoleSeeder
     {
     }
 }

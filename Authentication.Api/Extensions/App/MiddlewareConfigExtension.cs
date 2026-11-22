@@ -6,6 +6,7 @@ namespace Authentication.Api.Extensions.App
     {
         public static void AddMiddlewareConfig(this WebApplication app)
         {
+            app.UseHttpsRedirection();
 
             if (app.Environment.IsDevelopment())
             {
@@ -16,6 +17,8 @@ namespace Authentication.Api.Extensions.App
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.MapControllers();
         }
     }
 }

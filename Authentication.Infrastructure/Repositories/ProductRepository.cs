@@ -1,9 +1,9 @@
-﻿using System;
-using Authentication.Domain.Interfaces.Repositories;
+﻿//using System;
+//using Authentication.Domain.Interfaces.Repositories;
 
-namespace Authentication.Infrastructure.Repositories
-{
-    internal class ProductRepository : IProductRepository
-    {
-    }
-}
+//namespace Authentication.Infrastructure.Repositories
+//{
+//    internal class ProductRepository : IProductRepository
+//    {
+//    }
+//}

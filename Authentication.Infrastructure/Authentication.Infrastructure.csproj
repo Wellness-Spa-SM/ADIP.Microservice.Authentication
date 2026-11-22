@@ -7,26 +7,24 @@
 	</PropertyGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="System.Security.Cryptography.Pkcs" Version="10.0.15" />
-	</ItemGroup>
-	
-	<ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.14" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="10.0.14" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.14" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.14">
+		<PackageReference Include="HashiCorp.Vault" Version="0.3.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="11.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="11.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="11.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="11.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="11.0.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="TM.Common.EntityFrameworkCore" Version="1.0.0" />
+		<PackageReference Include="TM.Common.EntityFrameworkCore" Version="1.0.2" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Models\Dtos\" />
 		<Folder Include="Models\Complex\" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Authentication.Common\Authentication.Common.csproj" />
 		<ProjectReference Include="..\Authentication.Domain\Authentication.Domain.csproj" />
 	</ItemGroup>
 </Project>
