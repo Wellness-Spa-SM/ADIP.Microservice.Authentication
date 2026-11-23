@@ -8,9 +8,9 @@
 
 	<ItemGroup>
 		<Folder Include="Interfaces\Models\" />
-		<Folder Include="Interfaces\Repositories\" />
 		<Folder Include="Models\Dtos\" />
 		<Folder Include="Models\Complex\" />
+		<Folder Include="Utils\" />
 	</ItemGroup>
 	
 	<ItemGroup>
@@ -18,10 +18,10 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="TM.Common.Constants" Version="1.0.0" />
-		<PackageReference Include="TM.Common.EntityFrameworkCore" Version="1.0.2" />
-		<PackageReference Include="TM.Common.Models" Version="1.0.1" />
-		<PackageReference Include="TM.Common.Utils" Version="1.0.1" />
+		<PackageReference Include="TM.Common.Constants" Version="1.0.10" />
+		<PackageReference Include="TM.Common.EntityFrameworkCore" Version="1.0.10" />
+		<PackageReference Include="TM.Common.Models" Version="1.0.10" />
+		<PackageReference Include="TM.Common.Utils" Version="1.0.11" />
 	</ItemGroup>
 	
 	<ItemGroup>

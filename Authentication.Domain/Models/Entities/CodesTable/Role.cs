@@ -8,7 +8,13 @@ using TM.Common.Utils;
 
 namespace Authentication.Domain.Models.Entities.CodesTable
 {
-    public class Role : IdentityRole, IActivatableByUser, IModifiableByUser, IModifiable, IActivatable, ICreatableByUser
+    public class Role : 
+        IdentityRole, 
+        IActivatableByUser, 
+        IModifiableByUser, 
+        IModifiable, 
+        IActivatable, 
+        ICreatableByUser
     {
         public Role() => base.Id = Security.GenerateExtendedGuid("ROL",1);
 

@@ -16,11 +16,12 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="TM.Common.EntityFrameworkCore" Version="1.0.2" />
+		<PackageReference Include="TM.Common.EntityFrameworkCore" Version="1.0.10" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<Folder Include="Models\Complex\" />
+		<Folder Include="Seeders\" />
 	</ItemGroup>
 
 	<ItemGroup>

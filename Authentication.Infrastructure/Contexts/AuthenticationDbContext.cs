@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
-using TM.Common.Models.EntityFrameworkCore.DataAccessObjects;
+using TM.Common.EntityFrameworkCore.Models.DataAccessObjects;
 using Regex = Authentication.Common.Constants.RegEx;
 namespace Authentication.Infrastructure.Contexts
 {

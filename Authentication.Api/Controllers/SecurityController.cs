@@ -1,10 +1,7 @@
 ﻿using Authentication.Infrastructure.Models.Dtos;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TM.Common.Utils;
-using Microsoft.AspNetCore.Authorization;
-using Authentication.Infrastructure.Seeders;
-using Authentication.Infrastructure.Contexts;
+using Authentication.Application.Services.Interfaces;
 
 namespace Authentication.Api.Controllers
 {
@@ -12,10 +9,9 @@ namespace Authentication.Api.Controllers
     [ApiController]
     //[Host("*:5050")]
     //[Authorize]
-    public class SecurityController(AuthenticationDbContext dbContext) : ControllerBase
+    public class SecurityController(ISeederService seederService) : ControllerBase
     {
         [HttpPost("hidden/hash/{prefix}/{idIteration:int}/{count:int}/{isExtended:bool}")]
-        [AllowAnonymous]
         public IList<string> GetHash(string prefix = "", int idIteration = 1, int count = 1, bool isExtended = false)
         {
             var list = new List<string>();
@@ -31,12 +27,17 @@ namespace Authentication.Api.Controllers
             return null;
         }
 
-        [HttpPost("hidden/account/type/seed")]
-        public async Task<string> SeedAccountTypes()
+        [HttpPost("hidden/account/type/seed/async")]
+        public async Task<string> SeedAccountTypesAsync(CancellationToken cancellationToken)
         {
-            new AccountStatusSeeder(dbContext).Seed();
-            await dbContext.SaveChangesAsync();
+            await seederService.RunAsync(cancellationToken);
+            return "Success";
+        }
 
+        [HttpPost("hidden/account/type/seed")]
+        public string SeedAccountTypes()
+        {
+            seederService.Run();
             return "Success";
         }
     }
