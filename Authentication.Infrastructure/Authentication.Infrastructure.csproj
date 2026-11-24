@@ -16,11 +16,15 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="TM.Common.EntityFrameworkCore" Version="1.0.10" />
+		<PackageReference Include="TM.Common.Constants" Version="1.0.1" />
+		<PackageReference Include="TM.Common.EntityFrameworkCore" Version="1.0.1" />
+		<PackageReference Include="TM.Common.Models" Version="1.0.1" />
+		<PackageReference Include="TM.Common.Utils" Version="1.0.2" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<Folder Include="Constants\Enums\" />
+		<Folder Include="Helpers\CodesTable\" />
 		<Folder Include="Models\Complex\" />
 	</ItemGroup>
 

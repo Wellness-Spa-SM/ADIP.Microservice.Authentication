@@ -46,8 +46,10 @@ namespace Authentication.Common.Constants
 
         public static class Guid
         {
-            public const int MIN_LENGTH = 300;
-            public const int MAX_LENGTH = 900;
+            public const int MIN_LENGTH_1 = 3;
+
+            public const int MAX_LENGTH_1 = 300;
+            public const int MAX_LENGTH_2 = 900;
         }
     }
 }

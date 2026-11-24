@@ -24,4 +24,13 @@ USE the Commands below for the following actions:
 - update db
 - ``` Update-Database ` -Project Authentication.Infrastructure ` -StartupProject Authentication.Api ` -Context AuthenticationDbContext ```
 
+### Nuget Package outdated
+- Execute the code below to perform nuget refresh
+```
+ dotnet nuget locals all --clear
+ dotnet restore --force
+```
 
+
+### Roles Configuration
+When Adding / Removing / Updating the role(s), you also need to update the [Role Type Enum](./Authentication.Common/Constants/Enums/RoleType.cs)

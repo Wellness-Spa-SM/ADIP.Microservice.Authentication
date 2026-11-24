@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Authentication.Common.Constants.Enums;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,6 +19,7 @@ namespace Authentication.Domain.Models.Entities.CodesTable
     {
         public Role() => base.Id = Security.GenerateExtendedGuid("ROL",1);
 
+        public RoleType RoleType { get; set; }
         public string ModifiedBy { get; set; }
         public DateTime DateTimeModified { get; set; }
         public bool IsActive { get; set; }

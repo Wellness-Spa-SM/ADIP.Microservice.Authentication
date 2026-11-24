@@ -6,6 +6,7 @@ using Authentication.Infrastructure.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 builder.AddSqlConfig();
 builder.AddEndpointConfigs();
+builder.AddAuthenticationConfig();
 builder.AddDependencyInjectionConfig();
 
 var app = builder.Build();

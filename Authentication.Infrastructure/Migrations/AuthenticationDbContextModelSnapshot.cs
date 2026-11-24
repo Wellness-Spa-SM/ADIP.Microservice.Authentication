@@ -16,7 +16,7 @@ partial class AuthenticationDbContextModelSnapshot : ModelSnapshot
     // If you encounter a merge conflict in the line below, it means you need to
     // discard one of the migration branches and recreate its migrations on top of
     // the other branch. See https://aka.ms/efcore-docs-migrations-conflicts for more info.
-    public override string LastMigrationId => "20261124100006_InitDb";
+    public override string LastMigrationId => "20261124155513_InitDb2";
 
     protected override void BuildModel(ModelBuilder modelBuilder)
     {
@@ -164,6 +164,9 @@ partial class AuthenticationDbContextModelSnapshot : ModelSnapshot
                 b.Property<string>("NormalizedName")
                     .HasMaxLength(256)
                     .HasColumnType("nvarchar(256)");
+
+                b.Property<int>("RoleType")
+                    .HasColumnType("int");
 
                 b.HasKey("Id");
 

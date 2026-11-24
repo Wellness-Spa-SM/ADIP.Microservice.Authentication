@@ -1,7 +1,7 @@
-﻿using Authentication.Infrastructure.Models.Dtos;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TM.Common.Utils;
 using Authentication.Application.Services.Interfaces;
+using Authentication.Application.Models.Dtos;
 
 namespace Authentication.Api.Controllers
 {
@@ -9,9 +9,18 @@ namespace Authentication.Api.Controllers
     [ApiController]
     //[Host("*:5050")]
     //[Authorize]
-    public class SecurityController(ISeederService seederService) : ControllerBase
+    public class SecurityController : ControllerBase
     {
-        [HttpPost("hidden/hash/{prefix}/{idIteration:int}/{count:int}/{isExtended:bool}")]
+        private readonly ISeederService seederService;
+        private readonly IAccountService accountService;
+
+        public SecurityController(ISeederService seederService, IAccountService accountService)
+        {
+            this.seederService = seederService;
+            this.accountService = accountService;
+        }
+
+        [HttpPost("hash/{prefix}/{idIteration:int}/{count:int}/{isExtended:bool}")]
         public IList<string> GetHash(string prefix = "", int idIteration = 1, int count = 1, bool isExtended = false)
         {
             var list = new List<string>();
@@ -22,19 +31,20 @@ namespace Authentication.Api.Controllers
         }
 
         [HttpPost("account")]
-        public Task<string> CreateAccount([FromBody] CreateAccountOnlyDto data)
+        public async Task<string> CreateAccount([FromBody] CreateAccountDto data, CancellationToken cancellationToken)
         {
-            return null;
+            await accountService.CreateAccount(data, cancellationToken);
+            return "Success";
         }
 
-        [HttpPost("account/seed/type/async")]
+        [HttpPost("seed/async")]
         public async Task<string> SeedAccountTypesAsync(CancellationToken cancellationToken)
         {
             await seederService.RunAsync(cancellationToken);
             return "Success";
         }
 
-        [HttpPost("account/seed/type")]
+        [HttpPost("seed")]
         public string SeedAccountTypes(CancellationToken cancellationToken)
         {
             seederService.Run(cancellationToken);

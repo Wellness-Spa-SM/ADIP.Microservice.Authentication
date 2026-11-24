@@ -8,13 +8,15 @@
 	
 	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="11.0.0" />
-		<PackageReference Include="TM.Common.Constants" Version="1.0.10" />
-		<PackageReference Include="TM.Common.Utils" Version="1.0.12" />
+		<PackageReference Include="TM.Common.Constants" Version="1.0.1" />
+		<PackageReference Include="TM.Common.EntityFrameworkCore" Version="1.0.1" />
+		<PackageReference Include="TM.Common.Models" Version="1.0.1" />
+		<PackageReference Include="TM.Common.Utils" Version="1.0.2" />
 	</ItemGroup>
 	
 	<ItemGroup>
-	  <Folder Include="Models\Bases\" />
 	  <Folder Include="Helpers\" />
+	  <Folder Include="Models\Bases\" />
 	</ItemGroup>
 
 </Project>

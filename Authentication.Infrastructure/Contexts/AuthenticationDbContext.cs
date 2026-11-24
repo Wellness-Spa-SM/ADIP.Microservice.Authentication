@@ -38,20 +38,20 @@ namespace Authentication.Infrastructure.Contexts
             modelBuilder.Entity<Account>(
                 e => {
                     e.ToTable("Accounts");
-                    e.Property(p => p.Id).HasMaxLength(Regex.Guid.MIN_LENGTH);
+                    e.Property(p => p.Id).HasMaxLength(Regex.Guid.MAX_LENGTH_1);
                 });
 
             modelBuilder.Entity<Role>(
                 e => {
                     e.ToTable("Roles");
-                    e.Property(p => p.Id).HasMaxLength(Regex.Guid.MIN_LENGTH);
+                    e.Property(p => p.Id).HasMaxLength(Regex.Guid.MAX_LENGTH_1);
                 });
 
             modelBuilder.Entity<AccountStatus>(
                 e => {
                     e.HasIndex(e => e.Id).IsUnique();
                     e.ToTable("AccountStatuses");
-                    e.Property(p => p.Id).HasMaxLength(Regex.Guid.MIN_LENGTH);
+                    e.Property(p => p.Id).HasMaxLength(Regex.Guid.MAX_LENGTH_1);
                 });
         }
     }

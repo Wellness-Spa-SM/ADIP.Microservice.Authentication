@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 using Authentication.Common.Constants;
-using Tables = Authentication.Domain.Models.Entities.CodesTable;
+using Authentication.Domain.Models.Entities;
+using Authentication.Domain.Models.Entities.CodesTable;
 using Types = Authentication.Common.Constants.Enums;
 
-namespace Authentication.Domain.Helpers.CodesTable
+namespace Authentication.Infrastructure.Helpers
 {
-    public class AccountStatusHelper
+    public class AccountHelper
     {
-        public static Tables.AccountStatus Create(
+        public static AccountStatus CreateStatus(
             Types.AccountStatus code,
             string title,
             Guid? id = null,
@@ -17,7 +18,7 @@ namespace Authentication.Domain.Helpers.CodesTable
             int priority = StaticDetail.PRIORITY_DEFAULT
         )
         {
-            return new Tables.AccountStatus
+            return new AccountStatus
             {
                 Id = id ?? Guid.NewGuid(),
                 Code = code.ToString(),
@@ -31,7 +32,7 @@ namespace Authentication.Domain.Helpers.CodesTable
             };
         }
 
-        public static Tables.AccountStatus Create(
+        public static AccountStatus CreateStatus(
             Types.AccountStatus code,
             string title,
             string? id = null,
@@ -39,7 +40,7 @@ namespace Authentication.Domain.Helpers.CodesTable
             int priority = StaticDetail.PRIORITY_DEFAULT
         )
         {
-            return Create(code, title, Guid.Parse(id), creator, priority);
+            return CreateStatus(code, title, Guid.Parse(id), creator, priority);
         }
     }
 }

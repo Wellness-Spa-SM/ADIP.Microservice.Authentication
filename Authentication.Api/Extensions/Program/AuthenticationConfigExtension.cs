@@ -32,7 +32,8 @@ namespace Authentication.Api.Extensions.Program
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
             })
             .AddEntityFrameworkStores<AuthenticationDbContext>()
-            .AddDefaultTokenProviders(); ;
+            .AddSignInManager()
+            .AddDefaultTokenProviders();
         }
     }
 }
