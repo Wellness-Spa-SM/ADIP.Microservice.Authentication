@@ -20,8 +20,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Folder Include="Constants\Enums\" />
 		<Folder Include="Models\Complex\" />
-		<Folder Include="Seeders\" />
 	</ItemGroup>
 
 	<ItemGroup>

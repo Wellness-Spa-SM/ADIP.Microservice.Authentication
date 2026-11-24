@@ -12,12 +12,14 @@ namespace Authentication.Domain.Helpers.CodesTable
         public static Tables.AccountStatus Create(
             Types.AccountStatus code,
             string title,
+            Guid? id = null,
             string creator = StaticDetail.DOMAIN_SYSTEM,
             int priority = StaticDetail.PRIORITY_DEFAULT
         )
         {
             return new Tables.AccountStatus
             {
+                Id = id ?? Guid.NewGuid(),
                 Code = code.ToString(),
                 Title = title,
                 Priority = priority,
@@ -27,6 +29,17 @@ namespace Authentication.Domain.Helpers.CodesTable
                 DateTimeModified = DateTime.Now,
                 IsActive = true,
             };
+        }
+
+        public static Tables.AccountStatus Create(
+            Types.AccountStatus code,
+            string title,
+            string? id = null,
+            string creator = StaticDetail.DOMAIN_SYSTEM,
+            int priority = StaticDetail.PRIORITY_DEFAULT
+        )
+        {
+            return Create(code, title, Guid.Parse(id), creator, priority);
         }
     }
 }

@@ -5,7 +5,7 @@ using Authentication.Application.Services.Interfaces;
 
 namespace Authentication.Api.Controllers
 {
-    [Route("api/security")]
+    [Route("api/security/hidden")]
     [ApiController]
     //[Host("*:5050")]
     //[Authorize]
@@ -21,23 +21,23 @@ namespace Authentication.Api.Controllers
             return list;
         }
 
-        [HttpPost("hidden/account")]
+        [HttpPost("account")]
         public Task<string> CreateAccount([FromBody] CreateAccountOnlyDto data)
         {
             return null;
         }
 
-        [HttpPost("hidden/account/type/seed/async")]
+        [HttpPost("account/seed/type/async")]
         public async Task<string> SeedAccountTypesAsync(CancellationToken cancellationToken)
         {
             await seederService.RunAsync(cancellationToken);
             return "Success";
         }
 
-        [HttpPost("hidden/account/type/seed")]
-        public string SeedAccountTypes()
+        [HttpPost("account/seed/type")]
+        public string SeedAccountTypes(CancellationToken cancellationToken)
         {
-            seederService.Run();
+            seederService.Run(cancellationToken);
             return "Success";
         }
     }

@@ -16,7 +16,7 @@ partial class AuthenticationDbContextModelSnapshot : ModelSnapshot
     // If you encounter a merge conflict in the line below, it means you need to
     // discard one of the migration branches and recreate its migrations on top of
     // the other branch. See https://aka.ms/efcore-docs-migrations-conflicts for more info.
-    public override string LastMigrationId => "20261122182632_InitDb";
+    public override string LastMigrationId => "20261124100006_InitDb";
 
     protected override void BuildModel(ModelBuilder modelBuilder)
     {
@@ -130,7 +130,7 @@ partial class AuthenticationDbContextModelSnapshot : ModelSnapshot
                 b.ToTable("AccountStatuses");
             });
 
-        modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+        modelBuilder.Entity("Authentication.Domain.Models.Entities.CodesTable.Role", b =>
             {
                 b.Property<string>("Id")
                     .HasMaxLength(300)
@@ -138,6 +138,23 @@ partial class AuthenticationDbContextModelSnapshot : ModelSnapshot
 
                 b.Property<string>("ConcurrencyStamp")
                     .IsConcurrencyToken()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("CreatedBy")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<DateTime>("DateTimeCreated")
+                    .HasColumnType("datetime2");
+
+                b.Property<DateTime>("DateTimeModified")
+                    .HasColumnType("datetime2");
+
+                b.Property<bool>("IsActive")
+                    .HasColumnType("bit");
+
+                b.Property<string>("ModifiedBy")
+                    .IsRequired()
                     .HasColumnType("nvarchar(max)");
 
                 b.Property<string>("Name")
@@ -155,9 +172,7 @@ partial class AuthenticationDbContextModelSnapshot : ModelSnapshot
                     .HasDatabaseName("RoleNameIndex")
                     .HasFilter("[NormalizedName] IS NOT NULL");
 
-                b.ToTable("AspNetRoles");
-
-                b.UseTptMappingStrategy();
+                b.ToTable("Roles");
             });
 
         modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -266,33 +281,9 @@ partial class AuthenticationDbContextModelSnapshot : ModelSnapshot
                 b.ToTable("AspNetUserTokens");
             });
 
-        modelBuilder.Entity("Authentication.Domain.Models.Entities.CodesTable.Role", b =>
-            {
-                b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
-
-                b.Property<string>("CreatedBy")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<DateTime>("DateTimeCreated")
-                    .HasColumnType("datetime2");
-
-                b.Property<DateTime>("DateTimeModified")
-                    .HasColumnType("datetime2");
-
-                b.Property<bool>("IsActive")
-                    .HasColumnType("bit");
-
-                b.Property<string>("ModifiedBy")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-
-                b.ToTable("Roles");
-            });
-
         modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
             {
-                b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                b.HasOne("Authentication.Domain.Models.Entities.CodesTable.Role", null)
                     .WithMany()
                     .HasForeignKey("RoleId")
                     .OnDelete(DeleteBehavior.Cascade)
@@ -319,7 +310,7 @@ partial class AuthenticationDbContextModelSnapshot : ModelSnapshot
 
         modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
             {
-                b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                b.HasOne("Authentication.Domain.Models.Entities.CodesTable.Role", null)
                     .WithMany()
                     .HasForeignKey("RoleId")
                     .OnDelete(DeleteBehavior.Cascade)
@@ -337,15 +328,6 @@ partial class AuthenticationDbContextModelSnapshot : ModelSnapshot
                 b.HasOne("Authentication.Domain.Models.Entities.Account", null)
                     .WithMany()
                     .HasForeignKey("UserId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
-            });
-
-        modelBuilder.Entity("Authentication.Domain.Models.Entities.CodesTable.Role", b =>
-            {
-                b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                    .WithOne()
-                    .HasForeignKey("Authentication.Domain.Models.Entities.CodesTable.Role", "Id")
                     .OnDelete(DeleteBehavior.Cascade)
                     .IsRequired();
             });

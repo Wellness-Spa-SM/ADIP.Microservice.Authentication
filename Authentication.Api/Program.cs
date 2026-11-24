@@ -6,15 +6,9 @@ using Authentication.Infrastructure.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 builder.AddSqlConfig();
 builder.AddEndpointConfigs();
-builder.AddDependencyConfig();
+builder.AddDependencyInjectionConfig();
 
 var app = builder.Build();
-
-using (var scope = app.Services.CreateScope())
-{
-    var seeder = scope.ServiceProvider.GetRequiredService<ISeederService>();
-    await seeder.RunAsync(CancellationToken.None);
-}
 
 app.AddMiddlewareConfig();
 app.Run();

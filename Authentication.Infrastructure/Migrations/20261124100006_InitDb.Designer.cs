@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Authentication.Infrastructure.Migrations;
 
 [DbContext(typeof(AuthenticationDbContext))]
-[Migration("20261122182632_InitDb")]
-partial class _20261122182632_InitDb
+[Migration("20261124100006_InitDb")]
+partial class _20261124100006_InitDb
 {
     /// <inheritdoc />
     protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -128,7 +128,7 @@ partial class _20261122182632_InitDb
                 b.ToTable("AccountStatuses");
             });
 
-        modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+        modelBuilder.Entity("Authentication.Domain.Models.Entities.CodesTable.Role", b =>
             {
                 b.Property<string>("Id")
                     .HasMaxLength(300)
@@ -136,6 +136,23 @@ partial class _20261122182632_InitDb
 
                 b.Property<string>("ConcurrencyStamp")
                     .IsConcurrencyToken()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("CreatedBy")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<DateTime>("DateTimeCreated")
+                    .HasColumnType("datetime2");
+
+                b.Property<DateTime>("DateTimeModified")
+                    .HasColumnType("datetime2");
+
+                b.Property<bool>("IsActive")
+                    .HasColumnType("bit");
+
+                b.Property<string>("ModifiedBy")
+                    .IsRequired()
                     .HasColumnType("nvarchar(max)");
 
                 b.Property<string>("Name")
@@ -153,9 +170,7 @@ partial class _20261122182632_InitDb
                     .HasDatabaseName("RoleNameIndex")
                     .HasFilter("[NormalizedName] IS NOT NULL");
 
-                b.ToTable("AspNetRoles");
-
-                b.UseTptMappingStrategy();
+                b.ToTable("Roles");
             });
 
         modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -264,33 +279,9 @@ partial class _20261122182632_InitDb
                 b.ToTable("AspNetUserTokens");
             });
 
-        modelBuilder.Entity("Authentication.Domain.Models.Entities.CodesTable.Role", b =>
-            {
-                b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
-
-                b.Property<string>("CreatedBy")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<DateTime>("DateTimeCreated")
-                    .HasColumnType("datetime2");
-
-                b.Property<DateTime>("DateTimeModified")
-                    .HasColumnType("datetime2");
-
-                b.Property<bool>("IsActive")
-                    .HasColumnType("bit");
-
-                b.Property<string>("ModifiedBy")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-
-                b.ToTable("Roles");
-            });
-
         modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
             {
-                b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                b.HasOne("Authentication.Domain.Models.Entities.CodesTable.Role", null)
                     .WithMany()
                     .HasForeignKey("RoleId")
                     .OnDelete(DeleteBehavior.Cascade)
@@ -317,7 +308,7 @@ partial class _20261122182632_InitDb
 
         modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
             {
-                b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                b.HasOne("Authentication.Domain.Models.Entities.CodesTable.Role", null)
                     .WithMany()
                     .HasForeignKey("RoleId")
                     .OnDelete(DeleteBehavior.Cascade)
@@ -335,15 +326,6 @@ partial class _20261122182632_InitDb
                 b.HasOne("Authentication.Domain.Models.Entities.Account", null)
                     .WithMany()
                     .HasForeignKey("UserId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
-            });
-
-        modelBuilder.Entity("Authentication.Domain.Models.Entities.CodesTable.Role", b =>
-            {
-                b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                    .WithOne()
-                    .HasForeignKey("Authentication.Domain.Models.Entities.CodesTable.Role", "Id")
                     .OnDelete(DeleteBehavior.Cascade)
                     .IsRequired();
             });

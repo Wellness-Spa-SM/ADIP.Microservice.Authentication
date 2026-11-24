@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Authentication.Infrastructure.Migrations;
 
 /// <inheritdoc />
-public partial class _20261122182632_InitDb : Migration
+public partial class _20261124100006_InitDb : Migration
 {
     /// <inheritdoc />
     protected override void Up(MigrationBuilder migrationBuilder)
@@ -53,17 +53,22 @@ public partial class _20261122182632_InitDb : Migration
             });
 
         migrationBuilder.CreateTable(
-            name: "AspNetRoles",
+            name: "Roles",
             columns: table => new
             {
                 Id = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
+                ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                DateTimeModified = table.Column<DateTime>(type: "datetime2", nullable: false),
+                IsActive = table.Column<bool>(type: "bit", nullable: false),
+                CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                DateTimeCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                 Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                 NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                 ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
             },
             constraints: table =>
             {
-                table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                table.PrimaryKey("PK_Roles", x => x.Id);
             });
 
         migrationBuilder.CreateTable(
@@ -141,9 +146,9 @@ public partial class _20261122182632_InitDb : Migration
             {
                 table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
                 table.ForeignKey(
-                    name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
+                    name: "FK_AspNetRoleClaims_Roles_RoleId",
                     column: x => x.RoleId,
-                    principalTable: "AspNetRoles",
+                    principalTable: "Roles",
                     principalColumn: "Id",
                     onDelete: ReferentialAction.Cascade);
             });
@@ -165,31 +170,9 @@ public partial class _20261122182632_InitDb : Migration
                     principalColumn: "Id",
                     onDelete: ReferentialAction.Cascade);
                 table.ForeignKey(
-                    name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
+                    name: "FK_AspNetUserRoles_Roles_RoleId",
                     column: x => x.RoleId,
-                    principalTable: "AspNetRoles",
-                    principalColumn: "Id",
-                    onDelete: ReferentialAction.Cascade);
-            });
-
-        migrationBuilder.CreateTable(
-            name: "Roles",
-            columns: table => new
-            {
-                Id = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                DateTimeModified = table.Column<DateTime>(type: "datetime2", nullable: false),
-                IsActive = table.Column<bool>(type: "bit", nullable: false),
-                CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                DateTimeCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
-            },
-            constraints: table =>
-            {
-                table.PrimaryKey("PK_Roles", x => x.Id);
-                table.ForeignKey(
-                    name: "FK_Roles_AspNetRoles_Id",
-                    column: x => x.Id,
-                    principalTable: "AspNetRoles",
+                    principalTable: "Roles",
                     principalColumn: "Id",
                     onDelete: ReferentialAction.Cascade);
             });
@@ -218,13 +201,6 @@ public partial class _20261122182632_InitDb : Migration
             column: "RoleId");
 
         migrationBuilder.CreateIndex(
-            name: "RoleNameIndex",
-            table: "AspNetRoles",
-            column: "NormalizedName",
-            unique: true,
-            filter: "[NormalizedName] IS NOT NULL");
-
-        migrationBuilder.CreateIndex(
             name: "IX_AspNetUserClaims_UserId",
             table: "AspNetUserClaims",
             column: "UserId");
@@ -238,6 +214,13 @@ public partial class _20261122182632_InitDb : Migration
             name: "IX_AspNetUserRoles_RoleId",
             table: "AspNetUserRoles",
             column: "RoleId");
+
+        migrationBuilder.CreateIndex(
+            name: "RoleNameIndex",
+            table: "Roles",
+            column: "NormalizedName",
+            unique: true,
+            filter: "[NormalizedName] IS NOT NULL");
     }
 
     /// <inheritdoc />
@@ -266,8 +249,5 @@ public partial class _20261122182632_InitDb : Migration
 
         migrationBuilder.DropTable(
             name: "Accounts");
-
-        migrationBuilder.DropTable(
-            name: "AspNetRoles");
     }
 }

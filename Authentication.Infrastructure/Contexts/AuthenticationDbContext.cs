@@ -8,7 +8,7 @@ using TM.Common.EntityFrameworkCore.Models.DataAccessObjects;
 using Regex = Authentication.Common.Constants.RegEx;
 namespace Authentication.Infrastructure.Contexts
 {
-    public class AuthenticationDbContext(DbContextOptions<AuthenticationDbContext> options) : IdentityDbContext<Account>(options)
+    public class AuthenticationDbContext(DbContextOptions<AuthenticationDbContext> options) : IdentityDbContext<Account, Role, string>(options)
     {
         #region ENTITIES
         internal virtual Entity<Account> Accounts { get; set; }

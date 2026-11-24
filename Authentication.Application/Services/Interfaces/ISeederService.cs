@@ -6,7 +6,7 @@ namespace Authentication.Application.Services.Interfaces
 {
     public interface ISeederService
     {
-        void Run();
+        void Run(CancellationToken cancellationToken);
         Task RunAsync(CancellationToken cancellationToken);
     }
 }

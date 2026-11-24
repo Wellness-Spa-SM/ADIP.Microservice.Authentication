@@ -1,6 +1,7 @@
 ﻿using Authentication.Common.Constants;
 using Authentication.Domain.Models.Entities;
 using Authentication.Domain.Models.Entities.CodesTable;
+using Authentication.Infrastructure.Contexts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -30,7 +31,7 @@ namespace Authentication.Api.Extensions.Program
                 options.Lockout.MaxFailedAccessAttempts = 5;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
             })
-            .AddEntityFrameworkStores<IdentityDbContext>()
+            .AddEntityFrameworkStores<AuthenticationDbContext>()
             .AddDefaultTokenProviders(); ;
         }
     }

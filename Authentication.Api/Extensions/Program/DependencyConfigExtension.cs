@@ -1,13 +1,13 @@
 ﻿using Authentication.Application.Services.Implementations;
 using Authentication.Application.Services.Interfaces;
-using Authentication.Domain.Interfaces.Repositories;
 using Authentication.Infrastructure.Repositories;
+using TM.Common.Utils.Interfaces;
 
 namespace Authentication.Api.Extensions.Program
 {
     public static class DependencyConfigExtension
     {
-        public static void AddDependencyConfig(this WebApplicationBuilder builder)
+        public static void AddDependencyInjectionConfig(this WebApplicationBuilder builder)
         {
             AddRepositories(builder);
             AddServices(builder);
@@ -20,7 +20,8 @@ namespace Authentication.Api.Extensions.Program
 
         private static void AddRepositories(WebApplicationBuilder builder)
         {
-            builder.Services.AddScoped<ISeederRepository, AccountStatusSeederRepository>();
+            builder.Services.AddScoped<ISeeder, AccountStatusSeederRepository>();
+            builder.Services.AddScoped<ISeeder, RoleSeederRepository>();
         }
     }
 }
