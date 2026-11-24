@@ -23,7 +23,7 @@ namespace Authentication.Application.Services.Implementations
         {
             try
             {
-                var account = AccountHelper.ToEntity(data);
+                var account = AccountHelper.ToAccount(data);
                 await accountRepository.CreateAsync(account, data.Password, cancellationToken);
 
                 return TaskResult.Success("Created Account Successfully");

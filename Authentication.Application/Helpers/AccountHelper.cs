@@ -8,7 +8,7 @@ namespace Authentication.Application.Helpers
 {
     internal class AccountHelper
     {
-        internal static Account ToEntity(CreateAccountDto data)
+        internal static Account ToAccount(CreateAccountDto data)
         {
             return new Account()
             {
