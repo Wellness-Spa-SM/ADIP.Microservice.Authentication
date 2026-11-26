@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Authentication.Common.Constants;
+﻿using Authentication.Common.Constants;
 using Authentication.Domain.Models.Entities;
 using Authentication.Domain.Models.Entities.CodesTable;
+using Authentication.Infrastructure.Models.Complex;
+using Microsoft.AspNetCore.Identity;
+using TM.Common.Utils;
 using Types = Authentication.Common.Constants.Enums;
 
 namespace Authentication.Infrastructure.Helpers
@@ -41,6 +41,28 @@ namespace Authentication.Infrastructure.Helpers
         )
         {
             return CreateStatus(code, title, Guid.Parse(id), creator, priority);
+        }
+
+        public static Account CreateAccount(
+            string openId,
+            string firstName,
+            string lastName,
+            string username,
+            string email,
+            string password,
+            string? id = null
+        )
+        {
+            return new Account()
+            {
+                Id = id ?? new Account().Id,
+                OpenId = Security.Sanitize(openId),
+                FirstName = Security.Sanitize(firstName),
+                LastName = Security.Sanitize(lastName),
+                UserName = Security.Sanitize(username),
+                Email = email.ToLower().Trim(),
+                PasswordHash = password,
+            };
         }
     }
 }

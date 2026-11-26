@@ -25,7 +25,6 @@
 	<ItemGroup>
 		<Folder Include="Constants\Enums\" />
 		<Folder Include="Helpers\CodesTable\" />
-		<Folder Include="Models\Complex\" />
 	</ItemGroup>
 
 	<ItemGroup>

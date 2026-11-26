@@ -11,7 +11,7 @@ namespace Authentication.Infrastructure.Repositories
         AuthenticationDbContext dbContext,
         RoleManager<RoleEntity> roleManager) :
         Seeder<AuthenticationDbContext, RoleEntity, string>
-        (data, dbContext, d => d.NormalizedName!, callBackAsync: roles => CreateRoleAsync(roleManager, roles))
+        (data, dbContext, d => d.Id!, callBackAsync: roles => CreateRoleAsync(roleManager, roles))
     {
         private static IList<RoleEntity> data =
         [
@@ -31,7 +31,15 @@ namespace Authentication.Infrastructure.Repositories
         private static async Task CreateRoleAsync(RoleManager<RoleEntity> roleManager, IReadOnlyList<RoleEntity> roles)
         {
             foreach (var role in roles)
-                await roleManager.CreateAsync(role);
+            {
+                var roleExist = await roleManager.RoleExistsAsync(role.Name);
+                if (roleExist)
+                    continue;
+
+                var result = await roleManager.CreateAsync(role);
+                if (!result.Succeeded)
+                    continue;
+            }
         }
     }
 }

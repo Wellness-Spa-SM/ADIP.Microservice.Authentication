@@ -8,6 +8,7 @@
 
 	<ItemGroup>
 	  <PackageReference Include="TM.Common.Constants" Version="1.0.1" />
+	  <PackageReference Include="TM.Common.Utils" Version="1.0.3" />
 	</ItemGroup>
 	
 	<ItemGroup>

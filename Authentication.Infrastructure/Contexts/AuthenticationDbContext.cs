@@ -8,18 +8,26 @@ using TM.Common.EntityFrameworkCore.Models.DataAccessObjects;
 using Regex = Authentication.Common.Constants.RegEx;
 namespace Authentication.Infrastructure.Contexts
 {
-    public class AuthenticationDbContext(DbContextOptions<AuthenticationDbContext> options) : IdentityDbContext<Account, Role, string>(options)
+    public class AuthenticationDbContext : IdentityDbContext<Account, Role, string>
     {
         #region ENTITIES
-        internal virtual Entity<Account> Accounts { get; set; }
+        public virtual Entity<Account> Accounts { get; private set; }
 
         #endregion
 
         #region Codes Table
-        internal virtual Entity<Role> Roles { get; set; }
-        internal virtual Entity<AccountStatus> AccountStatuses { get; set; }
+        public virtual Entity<Role> Roles { get; set; }
+        public virtual Entity<AccountStatus> AccountStatuses { get; set; }
 
         #endregion
+
+        public AuthenticationDbContext(DbContextOptions<AuthenticationDbContext> options) :
+            base(options)
+        {
+            Accounts = new(Set<Account>());
+            Roles = new(Set<Role>());
+            AccountStatuses = new(Set<AccountStatus>());
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

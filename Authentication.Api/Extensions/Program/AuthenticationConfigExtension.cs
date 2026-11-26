@@ -30,6 +30,8 @@ namespace Authentication.Api.Extensions.Program
                 options.Lockout.AllowedForNewUsers = true;
                 options.Lockout.MaxFailedAccessAttempts = 5;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+
+                options.Tokens.AuthenticatorTokenProvider = TokenOptions.DefaultAuthenticatorProvider;
             })
             .AddEntityFrameworkStores<AuthenticationDbContext>()
             .AddSignInManager()

@@ -6,7 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Authentication.Infrastructure.Repositories
 {
-    internal class AccountRepository(AuthenticationDbContext dbContext, UserManager<Account> userManager, IPasswordHasher<Account> passwordHasher) : IAccountRepository
+    internal class AccountRepository(
+        AuthenticationDbContext dbContext, 
+        UserManager<Account> userManager, 
+        IPasswordHasher<Account> passwordHasher
+    ) : IAccountRepository
     {
         public async Task AddAsync(Account account, string password, CancellationToken cancellationToken)
         {

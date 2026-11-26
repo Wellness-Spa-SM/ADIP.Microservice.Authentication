@@ -2,6 +2,10 @@
 using TM.Common.Utils;
 using Authentication.Application.Services.Interfaces;
 using Authentication.Application.Models.Dtos;
+using Microsoft.AspNetCore.Identity;
+using Authentication.Domain.Models.Entities;
+using TM.Common.EntityFrameworkCore.Models.Complex;
+using TM.Common.Utils.Interfaces;
 
 namespace Authentication.Api.Controllers
 {
@@ -11,13 +15,15 @@ namespace Authentication.Api.Controllers
     //[Authorize]
     public class SecurityController : ControllerBase
     {
-        private readonly ISeederService seederService;
+        private readonly ISeederManager seederManager;
         private readonly IAccountService accountService;
+        private readonly IPasswordHasher<Account> passwordHasher;
 
-        public SecurityController(ISeederService seederService, IAccountService accountService)
+        public SecurityController(ISeederManager seederManager, IAccountService accountService, IPasswordHasher<Account> passwordHasher)
         {
-            this.seederService = seederService;
+            this.seederManager = seederManager;
             this.accountService = accountService;
+            this.passwordHasher = passwordHasher;
         }
 
         [HttpPost("hash/{prefix}/{idIteration:int}/{count:int}/{isExtended:bool}")]
@@ -30,24 +36,29 @@ namespace Authentication.Api.Controllers
             return list;
         }
 
-        [HttpPost("account")]
-        public async Task<string> CreateAccount([FromBody] CreateAccountDto data, CancellationToken cancellationToken)
+        [HttpPost("hash/password")]
+        public string GetPasswordHash([FromBody] string plainTextPassword)
         {
-            await accountService.CreateAccount(data, cancellationToken);
-            return "Success";
+            return passwordHasher.HashPassword(null, plainTextPassword);
+        }
+
+        [HttpPatch("account/password")]
+        public Task<TaskResult> UpdatePasswordHash([FromBody] UnsecureUpdateAccountPasswordDto data, CancellationToken cancellationToken)
+        {
+            return accountService.UnsecureUpdateAccountPasswordByEmailAsync(data, cancellationToken);
         }
 
         [HttpPost("seed/async")]
-        public async Task<string> SeedAccountTypesAsync(CancellationToken cancellationToken)
+        public async Task<string> SeedAsync(CancellationToken cancellationToken)
         {
-            await seederService.RunAsync(cancellationToken);
+            await seederManager.RunAsync(cancellationToken);
             return "Success";
         }
 
         [HttpPost("seed")]
-        public string SeedAccountTypes(CancellationToken cancellationToken)
+        public string Seed(CancellationToken cancellationToken)
         {
-            seederService.Run(cancellationToken);
+            seederManager.Run(cancellationToken);
             return "Success";
         }
     }
